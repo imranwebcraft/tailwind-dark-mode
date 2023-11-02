@@ -3,35 +3,35 @@ import "./App.css";
 import { useEffect } from "react";
 
 function App() {
-	// get html element
+	// Get the HTML element
 	const html = document.documentElement;
 
-	// Dark mode state
-	const [mode, setMode] = useState("light");
+	// Declare a state for geting the current theme
+	const [theme, setTheme] = useState("light");
 
-	// Dark mode state change function
-	const changeMode = () => {
-		if (mode === "light") {
+	// Modify HTML class with a function and a event handler
+	const changeTheme = () => {
+		if (theme === "light") {
 			html.classList.remove("light");
 			html.classList.add("dark");
-			setMode("dark");
-			// Set current mode to the local storage
-			localStorage.setItem("mode", "dark");
+			setTheme("dark");
+			localStorage.setItem("theme", "dark");
 		} else {
 			html.classList.remove("dark");
 			html.classList.add("light");
-			setMode("light");
-			localStorage.setItem("mode", "light");
+			setTheme("light");
+			localStorage.setItem("theme", "light");
 		}
 	};
 
+	//Local storage theke current theme take get kore setake percistent korte hobe
 	useEffect(() => {
-		const currentMode = localStorage.getItem("mode") || "light";
-		html.classList.add(currentMode);
-		setMode(currentMode);
+		const currentTheme = localStorage.getItem("theme");
+		html.classList.add(currentTheme);
+		setTheme(currentTheme);
 	}, [html.classList]);
 
-	console.log(mode);
+	console.log(theme);
 
 	return (
 		<div className="h-screen flex flex-col justify-center items-center">
@@ -55,7 +55,7 @@ function App() {
 				</p>
 			</div>
 			<button
-				onClick={changeMode}
+				onClick={changeTheme}
 				className=" mt-5 dark:text-gray-100 px-2 py-2 bg-gray-200 text-black dark:bg-slate-700 rounded-md"
 			>
 				Switch Mode
